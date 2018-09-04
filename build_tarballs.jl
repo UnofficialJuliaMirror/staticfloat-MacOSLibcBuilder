@@ -14,9 +14,8 @@ script = raw"""
 cd $WORKSPACE/srcdir/MacOSX*.sdk
 sysroot="${prefix}/${target}/sys-root"
 
-mkdir -p "${sysroot}/usr"
-mv usr/include "${sysroot}/usr/"
-mv usr/lib "${sysroot}/usr/"
+mkdir -p "${sysroot}"
+mv * "${sysroot}"
 """
 
 # These are the platforms we will build for by default, unless further
@@ -35,4 +34,4 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; skip_audit=true)
